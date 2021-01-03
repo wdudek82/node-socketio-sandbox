@@ -9,6 +9,10 @@ input {
   border-radius: 3px;
 }
 
+input:not(:first-child) {
+  margin-left: 3px;
+}
+
 .message {
   margin: 0;
 }
@@ -61,6 +65,7 @@ input {
   font-size: 14px;
   overflow: auto;
   background-color: #fff;
+  margin-bottom: 3px;
 }
 
 #user-color {
@@ -75,4 +80,8 @@ input {
 #main-input {
   padding: 0 5px;
   width: 100%;
+}
+
+#io-btn {
+  margin-left: 3px;
 }
