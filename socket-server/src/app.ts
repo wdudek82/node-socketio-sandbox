@@ -53,25 +53,38 @@ class App {
       },
     });
     io.on("connection", (socket: Socket) => {
-      socket.emit("youAreConnected", true)
-
-      this.socketsIds.push(socket.id);
+      this.handleSelfConnected(socket);
 
       this.getConnectedUsers(io.sockets.sockets);
 
-      io.sockets.emit("newUserConnected", this.chatUsers);
+      this.handleNewClientConnected(io);
+      this.handleMessageEvent(io, socket);
+      this.handleClientDisconnect(io, socket);
+    });
+  }
 
-      socket.on("message", (message: Message) => {
-        console.log("Message received:", message);
+  private handleSelfConnected(socket: Socket) {
+    socket.emit("youAreConnected", true)
+    this.socketsIds.push(socket.id);
+  }
 
-        io.sockets.emit("message", message);
-      });
+  private handleNewClientConnected(io: Server) {
+    io.sockets.emit("newUserConnected", this.chatUsers);
+  }
 
-      socket.on("disconnect", (reason) => {
-        console.log("user disconnected:", reason);
-        this.getConnectedUsers(io.sockets.sockets);
-        io.sockets.emit("userDisconnected", this.chatUsers);
-      });
+  private handleMessageEvent(io: Server, socket: Socket): void {
+    socket.on("message", (message: Message) => {
+      console.log("Message received:", message);
+
+      io.sockets.emit("message", message);
+    });
+  }
+
+  private handleClientDisconnect(io: Server, socket: Socket): void {
+    socket.on("disconnect", (reason) => {
+      console.log("user disconnected:", reason);
+      this.getConnectedUsers(io.sockets.sockets);
+      io.sockets.emit("userDisconnected", this.chatUsers);
     });
   }
 
