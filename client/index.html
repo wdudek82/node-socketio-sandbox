@@ -1,0 +1,47 @@
+<!-- ./client/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="chat-container">
+      <div>
+        <div id="chat-window" contenteditable="false">
+          <div
+            id="chat-messages"
+            class="chat__segment chat__segment--messages"
+          ></div>
+          <div id="chat-users" class="chat__segment chat__segment--users"></div>
+        </div>
+      </div>
+
+      <div style="display: flex">
+        <input id="user-color" type="color" />
+        <input id="username" type="text" />
+        <input id="main-input" type="text" autocomplete="false" />
+        <button id="io-btn">Send</button>
+      </div>
+    </main>
+
+    <br />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"
+      integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

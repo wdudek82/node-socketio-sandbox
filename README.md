@@ -1,2 +1,0 @@
-# Node Socket.io Sandbox
-
