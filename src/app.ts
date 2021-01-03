@@ -53,13 +53,14 @@ class App {
       },
     });
     io.on("connection", (socket: Socket) => {
+      socket.emit("youAreConnected", true)
       console.log("a user connected:", socket.id);
 
       this.socketsIds.push(socket.id);
 
       this.getConnectedUsers(io.sockets.sockets);
 
-      io.sockets.emit("chatUsers", this.chatUsers);
+      io.sockets.emit("newUserConnected", this.chatUsers);
 
       socket.on("message", (message: Message) => {
         console.log("Message received:", message);
@@ -70,7 +71,7 @@ class App {
       socket.on("disconnect", (reason) => {
         console.log("user disconnected:", reason);
         this.getConnectedUsers(io.sockets.sockets);
-        io.sockets.emit("chatUsers", this.chatUsers);
+        io.sockets.emit("userDisconnected", this.chatUsers);
       });
     });
   }
