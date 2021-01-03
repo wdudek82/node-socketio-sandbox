@@ -54,7 +54,6 @@ class App {
     });
     io.on("connection", (socket: Socket) => {
       socket.emit("youAreConnected", true)
-      console.log("a user connected:", socket.id);
 
       this.socketsIds.push(socket.id);
 
